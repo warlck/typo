@@ -630,5 +630,58 @@ describe Article do
     end
 
   end
-end
 
+  describe "merging " do
+    before do
+      @first_article = Factory.create(:article)
+      @second_article = Factory.create(:article, body: "Similar article", title: "Similar title" )
+      @first_article.comments << Factory.create(:comment)
+      @second_article.comments << Factory.create(:comment, author: "John Woo", body: "Dos commento", article_id: @second_article.id)
+    end
+     
+    it "should be defined for article" do
+       @first_article.should respond_to(:merge_with)
+    end
+
+
+    describe "with second article" do
+      before do
+         @first_body = @first_article.body
+         @first_comments = @first_article.comments
+         @second_comments = @second_article.comments
+         @first_author = @first_article.author
+         @merged = @first_article.merge_with(@second_article.id)
+      end
+      
+      it "should return article instance" do
+          @merged.class.to_s.should == "Article"
+      end
+
+      it "should put content from second article to first article " do
+        @merged.body.should == @first_body + " " + @second_article.body
+      end
+
+      it "should not change author" do
+        @merged.author.should == @first_author
+
+      end
+
+      it "should join comments from both articles in the original article " do
+         Comment.all.each { |c| c.article_id.should == @merged.id }
+      end
+
+      it "should delete second article" do
+        Article.find_by_id(@second_article.id).should be_nil
+      end
+
+      it "should not delete comments of second article after second article" +
+       "itself deleted" do
+        @second_comments.each {|c| Comment.find_by_id(c.id).should_not be_nil}
+      end
+
+
+    end
+    
+  end
+
+end

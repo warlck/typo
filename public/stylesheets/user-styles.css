@@ -22,3 +22,11 @@ img.right {
 	margin-right: 3px;
 	margin-bottom: 3px;
 }
+
+#merge_id {
+        padding-left: 10px;
+}
+
+#merge_label {
+        text-align: none;
+}

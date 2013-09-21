@@ -199,5 +199,15 @@ label.editor {
 	border-bottom: 1px solid #00438a;
 }
 
+#merge_id {
+        padding-left: 10px;
+        margin-right: -50px;
+    }
+
+#merge_label {
+        text-align: left;
+}
+
+
 
 

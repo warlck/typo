@@ -52,6 +52,18 @@ class Admin::ContentController < Admin::BaseController
     redirect_to :action => 'index'
   end
 
+  def merge
+    if current_user.admin?
+      @article = Article.find(params[:id])
+      @article.merge_with(params[:merge_id])
+      flash[:notice] = "Articles successfully merged"
+      redirect_to :action => 'index'
+    else 
+      flash[:warning] = "Access restricted"
+      redirect_to root_path
+    end
+  end
+
   def insert_editor
     editor = 'visual'
     editor = 'simple' if params[:editor].to_s == 'simple'

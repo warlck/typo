@@ -671,4 +671,21 @@ describe Admin::ContentController do
 
     end
   end
+  
+  describe "merge action" do
+   before do
+     Factory(:blog)
+     @user = Factory(:user, :text_filter => Factory(:markdown), :profile => Factory(:profile_publisher))
+     @first_article = Factory.create(:article)
+     @second_article = Factory.create(:article, body: "Similar article", title: "Similar title" )
+     request.session = {:user => @user.id}
+     post :merge, {id: @first_article.id, merge_id: @second_article.id}
+   end
+
+   it "should redirect to blog root if current user is not admin" do   
+     response.should redirect_to(root_path)    
+   end
+   
+  end
+
 end
