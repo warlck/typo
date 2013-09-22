@@ -1,5 +1,6 @@
 env = ENV["RAILS_ENV"] || 'development'
 dbfile = File.expand_path("../config/database.yml", __FILE__)
+ruby "1.9.3"
 
 #unless File.exists?(dbfile)
 #  raise "You need to configure config/database.yml first"
