@@ -1,4 +1,4 @@
-<% if @article and @article.id != nil %>
+<% if @article and @article.id != nil and User.find(session[:user]).admin? %>
 	<h4>Merge Articles</h4>
 	<% form_tag(merge_path(@article.id), method: "post", 
 	            name: "merge_with") do %>
