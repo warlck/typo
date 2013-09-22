@@ -1,7 +1,6 @@
 <% if @article and @article.id != nil and User.find(session[:user]).admin? %>
 	<h4>Merge Articles</h4>
-	<% form_tag(merge_path(@article.id), method: "post", 
-	            name: "merge_with") do %>
+	<% form_tag(merge_path(@article.id), method: "post") do %>
 	  <%= label_tag(:merge_with, "Article ID", id: "merge_label") %>
 	  <%= text_field_tag :merge_with %> <br>
 	  <%= submit_tag "Merge" %>
