@@ -55,7 +55,7 @@ class Admin::ContentController < Admin::BaseController
   def merge
     if current_user.admin?
       @article = Article.find(params[:id])
-      @article.merge_with(params[:merge_id])
+      @article.merge_with(params[:merge_with])
       flash[:notice] = "Articles successfully merged"
       redirect_to :action => 'index'
     else 

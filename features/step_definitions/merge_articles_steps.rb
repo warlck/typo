@@ -47,7 +47,7 @@ end
 When /^I post to merge path$/ do
   @first = Article.first
   @second = Article.last
-  post merge_path(@first.id) , merge_id: @second.id
+  post merge_path(@first.id) , merge_with: @second.id
 end
 
 Then /^I should be redirected to admin panel$/ do

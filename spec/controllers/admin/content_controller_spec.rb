@@ -679,7 +679,7 @@ describe Admin::ContentController do
      @first_article = Factory.create(:article)
      @second_article = Factory.create(:article, body: "Similar article", title: "Similar title" )
      request.session = {:user => @user.id}
-     post :merge, {id: @first_article.id, merge_id: @second_article.id}
+     post :merge, {id: @first_article.id, merge_with: @second_article.id}
    end
 
    it "should redirect to blog root if current user is not admin" do   
